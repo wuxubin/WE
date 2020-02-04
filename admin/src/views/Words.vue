@@ -1,20 +1,7 @@
 <template>
   <el-container style="height:calc( 100vh - 64px )">
-    <!-- <el-aside
-      width="400px"
-      style="background-color: #e8e7e6 height: 100vh; overflow-y:auto;height:100vh"
-    >
-      <el-menu router :default-openeds="['1']" unique-opened :default-active="$route.path">
-        <el-submenu v-for="(item , index) in helps" :key="index" :index="index.toString()">
-          <template slot="title">{{item.Key}}</template>
-          <el-menu-item-group>
-            <el-menu-item v-for="(d,i) in item.Data" :key="'s'+i">{{d.Name}}</el-menu-item>
-          </el-menu-item-group>
-        </el-submenu>
-      </el-menu>
-    </el-aside>-->
-    <el-aside width="400px">
-      <el-menu router :default-openeds="['1']" unique-opened :default-active="$route.path">
+    <el-aside width="400px" style="overflow-y:scroll">
+      <el-menu router :default-openeds="['0']" unique-opened :default-active="$route.path">
         <el-submenu v-for="(item , index) in helps" :key="index" :index="index.toString()">
           <template slot="title">{{item.Key}}</template>
           <el-menu-item-group>
@@ -23,12 +10,21 @@
         </el-submenu>
       </el-menu>
     </el-aside>
-    <el-main>Main</el-main>
+    <el-main>帮助内容</el-main>
   </el-container>
 </template>
 
 
 <style>
+.el-submenu .el-menu-item,
+.el-menu-item,
+.el-submenu__title {
+  height: 30px;
+  line-height: 30px;
+}
+.el-menu-item-group__title {
+  padding: 0;
+}
 </style>
 
 <script>

@@ -1,35 +1,47 @@
 <template>
-  <!-- <el-container style="height: 100vh;">
-    <el-aside width="80px" style="background-color: #292c31;color:white">
-      <div>报表字段</div>
-      <div>运营管理</div>
-      <div>系统设置</div>
-      <el-dropdown>
-        <i class="el-icon-setting" style="margin-right: 15px"></i>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>查看</el-dropdown-item>
-          <el-dropdown-item>新增</el-dropdown-item>
-          <el-dropdown-item>删除</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-      <span>{{item.name}}</span>
-    </el-aside>
-    <el-container>
-      <router-view :key="$route.path"></router-view>
-    </el-container>
-  </el-container>-->
   <el-container style="height:100vh">
-    <el-header>
-      <el-row :gutter="20">
-        <el-col :span="8">
-          <img src="../assets/logo.png" style="height:55px" />logo
-        </el-col>
-        <el-col :span="16">
+    <el-header style="display:flex">
+      <div style="width:400px">
+        <img src="../assets/logo.png" style="height:55px" />logo
+      </div>
+      <div style="flex:1;display:flex;">
+        <div style="width:300px">
           <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
             <el-button slot="append" icon="el-icon-search"></el-button>
           </el-input>
+        </div>
+        <div style="flex:1;">
+          <el-menu
+            :default-active="activeIndex"
+            class="el-menu-demo"
+            mode="horizontal"
+            @select="handleSelect"
+          >
+            <el-menu-item index="1">运营管理</el-menu-item>
+            <el-submenu index="2">
+              <template slot="title">帮助列表</template>
+              <el-menu-item index="2-1">报表字段</el-menu-item>
+              <el-menu-item index="2-2">选项2</el-menu-item>
+              <el-menu-item index="2-3">选项3</el-menu-item>
+              <el-submenu index="2-4">
+                <template slot="title">选项4</template>
+                <el-menu-item index="2-4-1">选项1</el-menu-item>
+                <el-menu-item index="2-4-2">选项2</el-menu-item>
+                <el-menu-item index="2-4-3">选项3</el-menu-item>
+              </el-submenu>
+            </el-submenu>
+            <el-menu-item index="3">系统设置</el-menu-item>
+          </el-menu>
+        </div>
+      </div>
+      <!-- <el-row :gutter="20">
+        <el-col :span="8">
+          
         </el-col>
-      </el-row>
+        <el-col :span="16">
+          
+        </el-col>
+      </el-row>-->
     </el-header>
     <router-view :key="$route.path"></router-view>
   </el-container>
