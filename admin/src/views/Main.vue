@@ -34,14 +34,6 @@
           </el-menu>
         </div>
       </div>
-      <!-- <el-row :gutter="20">
-        <el-col :span="8">
-          
-        </el-col>
-        <el-col :span="16">
-          
-        </el-col>
-      </el-row>-->
     </el-header>
     <router-view :key="$route.path"></router-view>
   </el-container>
