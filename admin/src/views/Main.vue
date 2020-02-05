@@ -1,16 +1,16 @@
 <template>
   <el-container style="height:100vh">
     <el-header style="display:flex">
-      <div style="width:400px">
+      <div style="width:200px">
         <img src="../assets/logo.png" style="height:55px" />logo
       </div>
-      <div style="flex:1;display:flex;">
+      <div style="flex:1;display:flex;justify-content: flex-end;">
         <div style="width:300px">
           <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
             <el-button slot="append" icon="el-icon-search"></el-button>
           </el-input>
         </div>
-        <div style="flex:1;">
+        <div>
           <el-menu
             :default-active="activeIndex"
             class="el-menu-demo"
@@ -31,6 +31,17 @@
               </el-submenu>
             </el-submenu>
             <el-menu-item index="3">系统设置</el-menu-item>
+            <el-menu-item index="4">
+              <el-dropdown>
+                <i class="el-icon-setting" style="margin-right: 15px"></i>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item>查看</el-dropdown-item>
+                  <el-dropdown-item>新增</el-dropdown-item>
+                  <el-dropdown-item>删除</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+              <span>{{item.name}}</span>
+            </el-menu-item>
           </el-menu>
         </div>
       </div>
