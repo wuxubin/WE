@@ -44,10 +44,10 @@ export default {
     async save() {
       console.log("save", this.model);
       if (this.id) {
-        await this.$http.put(`rest/categories/${this.id}`, this.model);
+        await this.$http.put(`categories/${this.id}`, this.model);
         this.id = null;
       } else {
-        await this.$http.post("rest/categories", this.model);
+        await this.$http.post("categories", this.model);
       }
       this.model.name = "";
       this.$message({
@@ -57,7 +57,7 @@ export default {
       this.fetch();
     },
     async fetch() {
-      const res = await this.$http.get("rest/categories");
+      const res = await this.$http.get("categories");
       this.items = res.data;
     },
     remove(row) {
@@ -66,7 +66,7 @@ export default {
         cancelButtonText: "取消",
         type: "warning"
       }).then(async () => {
-        await this.$http.delete(`rest/categories/${row._id}`);
+        await this.$http.delete(`categories/${row._id}`);
         this.$message({
           type: "success",
           message: "删除成功!"
@@ -78,9 +78,22 @@ export default {
       console.log("row", row);
       this.model.name = row.name;
       this.id = row._id;
+      // return
+      // this.$confirm(`是否确定要删除分类 "${row.name}"`, "提示", {
+      //   confirmButtonText: "确定",
+      //   cancelButtonText: "取消",
+      //   type: "warning"
+      // }).then(async () => {
+      //   await this.$http.delete(`categories/${row._id}`);
+      //   this.$message({
+      //     type: "success",
+      //     message: "删除成功!"
+      //   });
+      //   this.fetch();
+      // });
     },
     async fetchParents() {
-      const res = await this.$http.get(`rest/categories`);
+      const res = await this.$http.get(`categories`);
       this.parents = res.data;
     }
   },
