@@ -5,6 +5,9 @@ import Main from '../views/Main.vue'
 import Words from '../views/Words.vue'
 import Manage from '../views/Manage.vue'
 import CategoryList from '../views/CategoryList.vue'
+import DocumentList from '../views/DocumentList.vue'
+import ArticleEdit from '../views/ArticleEdit.vue'
+import ArticleList from '../views/ArticleList.vue'
 
 Vue.use(VueRouter)
 
@@ -18,7 +21,12 @@ const routes = [
       {
         path: 'manage',
         component: Manage,
-        children: [{ path: 'categories', component: CategoryList },
+        children: [
+          { path: 'documents', component: DocumentList },
+          { path: 'categories', component: CategoryList },
+          { path: 'articles/create', component: ArticleEdit },
+          { path: 'articles/edit/:id', component: ArticleEdit, props: true },
+          { path: 'articles/list', component: ArticleList },
         ]
       },
     ]

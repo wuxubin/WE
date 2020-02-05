@@ -35,6 +35,7 @@ export default {
       items: [],
       parents: [],
       model: {
+        parents: null,
         name: ""
       },
       id: null
@@ -49,7 +50,10 @@ export default {
       } else {
         await this.$http.post("rest/categories", this.model);
       }
-      this.model.name = "";
+      this.model = {
+        parents: null,
+        name: ""
+      };
       this.$message({
         type: "success",
         message: "保存成功"
@@ -75,19 +79,17 @@ export default {
       });
     },
     edit(row) {
-      console.log("row", row);
       this.model.name = row.name;
       this.id = row._id;
     },
     async fetchParents() {
-      const res = await this.$http.get(`rest/categories`);
+      const res = await this.$http.get(`rest/documents`);
       this.parents = res.data;
     }
   },
   created() {
     this.fetch();
     this.fetchParents();
-    console.log("ceui");
   }
 };
 </script>

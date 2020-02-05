@@ -1,25 +1,30 @@
 <template>
   <el-container style="height:calc( 100vh - 64px )">
-    <el-aside width="200px">
+    <el-aside width="150px">
       <el-menu
         class="el-menu-vertical-demo"
         style="height:100%"
+        router
       >
-        <el-menu-item index="1">
+        <el-menu-item index="/manage/documents">
           <i class="el-icon-receiving"></i>
           <span slot="title">文档列表</span>
         </el-menu-item>
-        <el-menu-item index="2">
+        <el-menu-item index="/manage/categories">
           <i class="el-icon-notebook-1"></i>
           <span slot="title">分类列表</span>
         </el-menu-item>
-        <el-menu-item index="3">
+        <el-menu-item index="/manage/articles/list">
           <i class="el-icon-document"></i>
           <span slot="title">文章列表</span>
         </el-menu-item>
-        <el-menu-item index="4">
+        <el-menu-item index="/manage/articles/create">
           <i class="el-icon-document-add"></i>
           <span slot="title">新建文章</span>
+        </el-menu-item>
+        <el-menu-item index="5">
+          <i class="el-icon-chat-square"></i>
+          <span slot="title">评论管理</span>
         </el-menu-item>
       </el-menu>
     </el-aside>

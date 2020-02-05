@@ -19,7 +19,11 @@ module.exports = app => {
     })
   })
   router.get('/', async (req, res) => {
-    const items = await req.Model.find().limit(10)
+    const queryOptions = {}
+    if (req.Model.modelName === 'Category') {
+      queryOptions.populate = 'parent'
+    }
+    const items = await req.Model.find().setOptions(queryOptions).limit(10)
     res.send(items)
   })
   router.get('/:id', async (req, res) => {
@@ -27,6 +31,7 @@ module.exports = app => {
     res.send(model)
   })
   app.use('/admin/api/rest/:resource', async (req, res, next) => {
+    // 将小写复数转成大写单数形式
     const modelName = require('inflection').classify(req.params.resource)
     req.Model = require(`../../models/${modelName}`)
     next()
