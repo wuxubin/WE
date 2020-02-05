@@ -2,14 +2,14 @@
   <el-container style="height:100vh">
     <el-header style="display:flex">
       <div style="width:200px">
-        <img src="../assets/logo.png" style="height:55px" />logo
+        <img src="../assets/logo.png" style="height:55px" />
       </div>
       <div style="flex:1;display:flex;justify-content: flex-end;">
-        <div style="width:300px">
-          <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
+        <!-- <div style="width:300px">
+          <el-input placeholder="请输入内容" class="input-with-select">
             <el-button slot="append" icon="el-icon-search"></el-button>
           </el-input>
-        </div>
+        </div> -->
         <div>
           <el-menu
             :default-active="activeIndex"
@@ -17,7 +17,7 @@
             mode="horizontal"
             @select="handleSelect"
           >
-            <el-menu-item index="1">运营管理</el-menu-item>
+            <el-menu-item index="1">内容管理</el-menu-item>
             <el-submenu index="2">
               <template slot="title">帮助列表</template>
               <el-menu-item index="2-1">报表字段</el-menu-item>

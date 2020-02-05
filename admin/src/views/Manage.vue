@@ -1,30 +1,45 @@
 <template>
-  <el-container style="height:calc( 100vh - 64px )" class="nav">
-    <el-aside width="400px" style="overflow-y:scroll">
-      <el-menu router :default-openeds="['0']" unique-opened :default-active="$route.path">
-        <el-submenu v-for="(item , index) in helps" :key="index" :index="index.toString()">
-          <template slot="title">{{item.Key}}</template>
-          <el-menu-item-group>
-            <el-menu-item v-for="(d,i) in item.Data" :key="'s'+i">{{d.Name}}</el-menu-item>
-          </el-menu-item-group>
-        </el-submenu>
+  <el-container style="height:calc( 100vh - 64px )">
+    <el-aside width="200px">
+      <el-menu
+        class="el-menu-vertical-demo"
+        style="height:100%"
+      >
+        <el-menu-item index="1">
+          <i class="el-icon-receiving"></i>
+          <span slot="title">文档列表</span>
+        </el-menu-item>
+        <el-menu-item index="2">
+          <i class="el-icon-notebook-1"></i>
+          <span slot="title">分类列表</span>
+        </el-menu-item>
+        <el-menu-item index="3">
+          <i class="el-icon-document"></i>
+          <span slot="title">文章列表</span>
+        </el-menu-item>
+        <el-menu-item index="4">
+          <i class="el-icon-document-add"></i>
+          <span slot="title">新建文章</span>
+        </el-menu-item>
       </el-menu>
     </el-aside>
-    <el-main>帮助内容</el-main>
+    <el-main>
+      <router-view :key="$route.path"></router-view>
+    </el-main>
   </el-container>
 </template>
 
 
 <style>
-.nav .el-submenu .nav .el-menu-item,
-.nav .el-menu-item,
-.nav .el-submenu__title {
+/* .el-submenu .el-menu-item,
+.el-menu-item,
+.el-submenu__title {
   height: 30px;
   line-height: 30px;
 }
-.nav .el-menu-item-group__title {
+.el-menu-item-group__title {
   padding: 0;
-}
+} */
 </style>
 
 <script>
