@@ -12,11 +12,11 @@
         </div> -->
         <div>
           <el-menu
-            :default-active="activeIndex"
             class="el-menu-demo"
             mode="horizontal"
-            @select="handleSelect"
           >
+            <!-- :default-active="activeIndex" -->
+            <!-- @select="handleSelect" -->
             <el-menu-item index="1">内容管理</el-menu-item>
             <el-submenu index="2">
               <template slot="title">帮助列表</template>
