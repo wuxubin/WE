@@ -9,6 +9,7 @@ import DocumentList from '../views/DocumentList.vue'
 import ArticleEdit from '../views/ArticleEdit.vue'
 import ArticleList from '../views/ArticleList.vue'
 import HelpDocument from '../views/HelpDocument.vue'
+import Edit from '../views/Edit.vue'
 
 Vue.use(VueRouter)
 
@@ -18,6 +19,7 @@ const routes = [
     name: 'main',
     component: Main,
     children: [
+      { path: 'edit', component: Edit },
       { path: 'setting', component: Words },
       { path: 'help/:id', component: HelpDocument, props: true },
       {

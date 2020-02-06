@@ -2,15 +2,25 @@
   <el-container style="height:calc( 100vh - 64px )" class="nav">
     <el-aside width="400px" style="overflow-y:scroll">
       <el-menu router unique-opened :default-active="$route.path">
-        <el-submenu v-for="(item , index) in helpDocument.data" :key="index" :index="index.toString()">
+        <el-submenu
+          v-for="(item , index) in helpDocument.data"
+          :key="index"
+          :index="index.toString()"
+        >
           <template slot="title">{{item.name}}</template>
           <el-menu-item-group>
-            <el-menu-item v-for="(d,i) in item.articleList" :key="'s'+i">{{d.title}}</el-menu-item>
+            <el-menu-item
+              v-for="(d,i) in item.articleList"
+              :key="'s'+i"
+              @click="showDetail(d)"
+            >{{d.title}}</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>
     </el-aside>
-    <el-main>帮助内容</el-main>
+    <el-main>
+      <div class="ql-editor" v-html="article.body"></div>
+    </el-main>
   </el-container>
 </template>
 
@@ -34,13 +44,19 @@ export default {
   },
   data() {
     return {
-      helpDocument: {}
+      helpDocument: {},
+      article: {
+        body: ""
+      }
     };
   },
   methods: {
     async fetch() {
       const res = await this.$http.get(`rest/documents/${this.id}`);
       this.helpDocument = res.data;
+    },
+    showDetail(article) {
+      this.article = article;
     }
   },
   created() {
