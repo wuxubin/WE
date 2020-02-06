@@ -9,15 +9,15 @@
           <el-input placeholder="请输入内容" class="input-with-select">
             <el-button slot="append" icon="el-icon-search"></el-button>
           </el-input>
-        </div> -->
+        </div>-->
         <div>
-          <el-menu
-            class="el-menu-demo"
-            mode="horizontal"
-          >
+          <el-menu class="el-menu-demo" mode="horizontal" router>
             <!-- :default-active="activeIndex" -->
             <!-- @select="handleSelect" -->
-            <el-menu-item index="1">内容管理</el-menu-item>
+            <el-menu-item
+              index="/manage/documents"
+              :style="{'border-bottom': $route.path.includes('manage')?'2px solid #409EFF':''}"
+            >内容管理</el-menu-item>
             <el-submenu index="2">
               <template slot="title">帮助列表</template>
               <el-menu-item index="2-1">报表字段</el-menu-item>
@@ -73,6 +73,9 @@ export default {
     return {
       item: item
     };
+  },
+  created() {
+    console.log("r", this.$route.path, this.$route.path.startsWith("/manage"));
   }
 };
 </script>
