@@ -8,6 +8,7 @@ import CategoryList from '../views/CategoryList.vue'
 import DocumentList from '../views/DocumentList.vue'
 import ArticleEdit from '../views/ArticleEdit.vue'
 import ArticleList from '../views/ArticleList.vue'
+import HelpDocument from '../views/HelpDocument.vue'
 
 Vue.use(VueRouter)
 
@@ -17,10 +18,12 @@ const routes = [
     name: 'main',
     component: Main,
     children: [
-      { path: 'words', component: Words },
+      { path: 'setting', component: Words },
+      { path: 'help/:id', component: HelpDocument, props: true },
       {
         path: 'manage',
         component: Manage,
+        redirect: 'manage/documents',
         children: [
           { path: 'documents', component: DocumentList },
           { path: 'categories', component: CategoryList },

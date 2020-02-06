@@ -9,4 +9,11 @@ const schema = new mongoose.Schema({
   timestamps: true
 })
 
+schema.virtual('children', {
+  localField: '_id',
+  foreignField: 'parent',
+  justOne: false,
+  ref: 'Category'
+})
+
 module.exports = mongoose.model('Article', schema)

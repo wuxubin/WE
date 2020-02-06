@@ -27,7 +27,25 @@ module.exports = app => {
     res.send(items)
   })
   router.get('/:id', async (req, res) => {
-    const model = await req.Model.findById(req.params.id)
+    let model = await req.Model.findById(req.params.id)
+    if (req.Model.modelName === 'Document') {
+      const Category = require(`../../models/Category`)
+      const categories = await Category.aggregate([
+        { $match: { parent: model._id } },
+        {
+          $lookup: {
+            from: 'articles',
+            localField: '_id',
+            foreignField: 'categories',
+            as: 'articleList'
+          }
+        }
+      ])
+      model = {
+        name: model.name,
+        data: categories,
+      }
+    }
     res.send(model)
   })
   app.use('/admin/api/rest/:resource', async (req, res, next) => {

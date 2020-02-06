@@ -34,7 +34,6 @@ export default {
   },
   methods: {
     async save() {
-      console.log("save", this.model);
       if (this.id) {
         await this.$http.put(`rest/documents/${this.id}`, this.model);
         this.id = null;

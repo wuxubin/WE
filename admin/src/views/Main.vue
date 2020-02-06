@@ -18,30 +18,34 @@
               index="/manage/documents"
               :style="{'border-bottom': $route.path.includes('manage')?'2px solid #409EFF':''}"
             >内容管理</el-menu-item>
-            <el-submenu index="2">
+            <el-submenu
+              index="2"
+              :style="{'border-bottom': $route.path.includes('help')?'2px solid #409EFF':''}"
+            >
               <template slot="title">帮助列表</template>
-              <el-menu-item index="2-1">报表字段</el-menu-item>
-              <el-menu-item index="2-2">选项2</el-menu-item>
+              <el-menu-item
+                :index="'/help/'+item._id"
+                v-for="(item,index) in helpList"
+                :key="index"
+              >{{item.name}}</el-menu-item>
+              <!-- <el-menu-item index="2-2">选项2</el-menu-item>
               <el-menu-item index="2-3">选项3</el-menu-item>
               <el-submenu index="2-4">
                 <template slot="title">选项4</template>
                 <el-menu-item index="2-4-1">选项1</el-menu-item>
                 <el-menu-item index="2-4-2">选项2</el-menu-item>
                 <el-menu-item index="2-4-3">选项3</el-menu-item>
-              </el-submenu>
+              </el-submenu>-->
             </el-submenu>
-            <el-menu-item index="3">系统设置</el-menu-item>
-            <el-menu-item index="4">
-              <el-dropdown>
-                <i class="el-icon-setting" style="margin-right: 15px"></i>
-                <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item>查看</el-dropdown-item>
-                  <el-dropdown-item>新增</el-dropdown-item>
-                  <el-dropdown-item>删除</el-dropdown-item>
-                </el-dropdown-menu>
-              </el-dropdown>
-              <span>{{item.name}}</span>
-            </el-menu-item>
+            <el-menu-item index="/setting">系统设置</el-menu-item>
+            <el-dropdown>
+              <i class="el-icon-setting" style="margin-right: 15px">{{curUser.name}}</i>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>查看</el-dropdown-item>
+                <el-dropdown-item>新增</el-dropdown-item>
+                <el-dropdown-item>删除</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
           </el-menu>
         </div>
       </div>
@@ -62,6 +66,10 @@
 .el-aside {
   color: #333;
 }
+
+.el-menu--horizontal > .el-submenu.is-active .el-submenu__title {
+  border-bottom: 0px solid;
+}
 </style>
 
 <script>
@@ -71,11 +79,18 @@ export default {
       name: "吴旭彬"
     };
     return {
-      item: item
+      curUser: item,
+      helpList: []
     };
   },
+  methods: {
+    async fetch() {
+      const res = await this.$http.get("rest/documents");
+      this.helpList = res.data;
+    }
+  },
   created() {
-    console.log("r", this.$route.path, this.$route.path.startsWith("/manage"));
+    this.fetch();
   }
 };
 </script>
