@@ -10,7 +10,7 @@
         <el-input v-model="model.name" placeholder="分类名称"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="save">{{id?'保存编辑':'新增分类'}}</el-button>
+        <el-button type="primary" @click="save">{{model._id?'保存编辑':'新增分类'}}</el-button>
       </el-form-item>
     </el-form>
     <el-table :data="items">

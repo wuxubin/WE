@@ -15,6 +15,7 @@
       </el-menu>
     </el-aside>
     <el-main>
+      <div v-if="!$route.params.article_id">{{helpDocument.desc}}</div>
       <router-view :key="$route.params.article_id"></router-view>
     </el-main>
   </el-container>

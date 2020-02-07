@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 // import Home from '../views/Home.vue'
 import Main from '../views/Main.vue'
-import Words from '../views/Words.vue'
+// import Words from '../views/Words.vue'
 import Manage from '../views/Manage.vue'
 import CategoryList from '../views/CategoryList.vue'
 import DocumentList from '../views/DocumentList.vue'
@@ -23,7 +23,7 @@ const routes = [
     component: Main,
     redirect: 'manage/documents',
     children: [
-      { path: 'setting', component: Words },
+      // { path: 'setting', component: Words },
       {
         path: 'help/:id', component: HelpDocument, props: true,
         children: [

@@ -1,5 +1,8 @@
 <template>
-  <div class="ql-editor" v-html="article.body"></div>
+  <div>
+    <div>{{article.desc}}</div>
+    <div class="ql-editor" v-html="article.body"></div>
+  </div>
 </template>
 
 

@@ -57,6 +57,7 @@ module.exports = app => {
       model = {
         _id: model._id,
         name: model.name,
+        desc: model.desc,
         data: categories,
       }
     }

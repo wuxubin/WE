@@ -37,7 +37,7 @@
                 <el-menu-item index="2-4-3">选项3</el-menu-item>
               </el-submenu>-->
             </el-submenu>
-            <el-menu-item index="/setting">系统设置</el-menu-item>
+            <!-- <el-menu-item index="/setting">系统设置</el-menu-item> -->
             <el-dropdown>
               <i class="el-icon-setting" style="margin-right: 15px">{{curUser.name}}</i>
               <el-dropdown-menu slot="dropdown">

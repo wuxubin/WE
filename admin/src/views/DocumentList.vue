@@ -9,7 +9,7 @@
           <el-input type="textarea" rows="10" v-model="model.desc"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="save">{{id?'保存编辑':'新增文档'}}</el-button>
+          <el-button type="primary" @click="save">{{model._id?'保存编辑':'新增文档'}}</el-button>
         </el-form-item>
       </el-form>
     </el-col>
