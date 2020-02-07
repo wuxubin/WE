@@ -50,7 +50,7 @@
         </div>
       </div>
     </el-header>
-    <router-view :key="$route.path"></router-view>
+    <router-view :key="$route.params.id"></router-view>
   </el-container>
 </template>
 

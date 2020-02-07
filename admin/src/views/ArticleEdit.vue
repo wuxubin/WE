@@ -15,6 +15,9 @@
       <el-form-item label="标题">
         <el-input v-model="model.title"></el-input>
       </el-form-item>
+      <el-form-item label="描述">
+        <el-input v-model="model.desc"></el-input>
+      </el-form-item>
       <el-form-item label="详情">
         <!-- <vue-editor v-model="model.body" useCustomImageHandler @imageAdded="handleImageAdded"></vue-editor> -->
         <tinymce v-model="model.body" :height="300" />

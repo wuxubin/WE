@@ -1,46 +1,62 @@
 <template>
-  <div>
-    <el-form :inline="true" :model="model" class="demo-form-inline">
-      <el-form-item label="文档名称">
-        <el-input v-model="model.name" placeholder="文档名称"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="save">{{id?'保存编辑':'新增文档'}}</el-button>
-      </el-form-item>
-    </el-form>
-    <el-table :data="items">
-      <el-table-column prop="_id" label="ID" width="240"></el-table-column>
-      <el-table-column prop="name" label="文档名称"></el-table-column>
-      <el-table-column fixed="right" label="操作" width="180">
-        <template slot-scope="scope">
-          <el-button type="text" size="small" @click="edit(scope.row)">编辑</el-button>
-          <el-button type="text" size="small" @click="remove(scope.row)">删除</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-  </div>
+  <el-row class="h-100">
+    <el-col :span="8">
+      <el-form :model="model" class="demo-form-inline" label-width="80px">
+        <el-form-item label="文档名称">
+          <el-input v-model="model.name" placeholder="文档名称"></el-input>
+        </el-form-item>
+        <el-form-item label="描述">
+          <el-input type="textarea" rows="10" v-model="model.desc"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="save">{{id?'保存编辑':'新增文档'}}</el-button>
+        </el-form-item>
+      </el-form>
+    </el-col>
+    <el-col :span="16">
+      <el-table :data="items" max-height="600">
+        <!-- <el-table-column prop="_id" label="ID" width="240"></el-table-column> -->
+        <el-table-column label="文档名称">
+          <template slot-scope="scope">
+            <el-tooltip placement="right" effect="light">
+              <div slot="content" style="max-width:200px">{{scope.row.desc}}</div>
+              <span>{{scope.row.name}}</span>
+            </el-tooltip>
+          </template>
+        </el-table-column>
+        <el-table-column fixed="right" label="操作" width="180">
+          <template slot-scope="scope">
+            <el-button type="text" size="small" @click="edit(scope.row)">编辑</el-button>
+            <el-button type="text" size="small" @click="remove(scope.row)">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
+const model = {
+  name: "",
+  desc: ""
+};
 export default {
   data() {
     return {
       items: [],
-      model: {
-        name: ""
-      },
-      id: null
+      model: Object.assign({}, model)
     };
   },
   methods: {
     async save() {
-      if (this.id) {
-        await this.$http.put(`rest/documents/${this.id}`, this.model);
-        this.id = null;
+      if (this.model._id) {
+        await this.$http.put(`rest/documents/${this.model._id}`, this.model);
       } else {
         await this.$http.post("rest/documents", this.model);
       }
-      this.model.name = "";
+      console.log(Object.assign({}, model));
+
+      this.model = Object.assign({}, model);
       this.$message({
         type: "success",
         message: "保存成功"
@@ -66,8 +82,7 @@ export default {
       });
     },
     edit(row) {
-      this.model.name = row.name;
-      this.id = row._id;
+      this.model = row;
     }
   },
   created() {

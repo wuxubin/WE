@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <h1>分类列表</h1> -->
     <el-form :inline="true" :model="model" class="demo-form-inline">
       <el-form-item label="所属文档">
         <el-select v-model="model.parent">
@@ -15,7 +14,7 @@
       </el-form-item>
     </el-form>
     <el-table :data="items">
-      <el-table-column prop="_id" label="ID" width="240"></el-table-column>
+      <!-- <el-table-column prop="_id" label="ID" width="240"></el-table-column> -->
       <el-table-column prop="parent.name" label="所属文档"></el-table-column>
       <el-table-column prop="name" label="分类名称"></el-table-column>
       <el-table-column fixed="right" label="操作" width="180">
@@ -29,31 +28,27 @@
 </template>
 
 <script>
+const model = {
+  parent: null,
+  name: ""
+};
 export default {
   data() {
     return {
       items: [],
       parents: [],
-      model: {
-        parents: null,
-        name: ""
-      },
-      id: null
+      model: Object.assign({}, model),
     };
   },
   methods: {
     async save() {
       console.log("save", this.model);
-      if (this.id) {
-        await this.$http.put(`rest/categories/${this.id}`, this.model);
-        this.id = null;
+      if (this.model._id) {
+        await this.$http.put(`rest/categories/${this.model._id}`, this.model);
       } else {
         await this.$http.post("rest/categories", this.model);
       }
-      this.model = {
-        parents: null,
-        name: ""
-      };
+      this.model = Object.assign({}, model);
       this.$message({
         type: "success",
         message: "保存成功"
@@ -79,8 +74,8 @@ export default {
       });
     },
     edit(row) {
-      this.model.name = row.name;
-      this.id = row._id;
+      this.model =Object.assign({}, row) ;
+      this.model.parent = row.parent._id;
     },
     async fetchParents() {
       const res = await this.$http.get(`rest/documents`);
