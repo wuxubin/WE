@@ -1,7 +1,8 @@
 <template>
   <div>
     <el-table :data="items">
-      <el-table-column prop="_id" label="ID" width="240"></el-table-column>
+      <!-- <el-table-column prop="_id" label="ID" width="240"></el-table-column> -->
+      <el-table-column prop="categories[0].name" label="所属分类"></el-table-column>
       <el-table-column prop="title" label="标题"></el-table-column>
       <el-table-column fixed="right" label="操作" width="180">
         <template slot-scope="scope">
