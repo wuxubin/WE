@@ -41,9 +41,11 @@
             <el-dropdown>
               <i class="el-icon-setting" style="margin-right: 15px">{{curUser.name}}</i>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>查看</el-dropdown-item>
-                <el-dropdown-item>新增</el-dropdown-item>
-                <el-dropdown-item>删除</el-dropdown-item>
+                <el-dropdown-item>
+                  <div @click="exit">退出</div>
+                </el-dropdown-item>
+                <!-- <el-dropdown-item>新增</el-dropdown-item>
+                <el-dropdown-item>删除</el-dropdown-item>-->
               </el-dropdown-menu>
             </el-dropdown>
           </el-menu>
@@ -76,7 +78,7 @@
 export default {
   data() {
     const item = {
-      name: "吴旭彬"
+      name: "用户"
     };
     return {
       curUser: item,
@@ -87,6 +89,10 @@ export default {
     async fetch() {
       const res = await this.$http.get("rest/documents");
       this.helpList = res.data;
+    },
+    exit() {
+      localStorage.token = "";
+      this.$router.push("/login");
     }
   },
   created() {
